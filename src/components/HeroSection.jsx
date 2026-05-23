@@ -54,7 +54,7 @@ const HeroSection = () => {
                 delay:2.0,
                 duration:1.5,
             }} 
-            className="text-xl md:text-1xl lg:text-2xl text-purple-200 max-w-2xl pointer-event-auto"
+            className="text-xl md:text-1xl lg:text-2xl text-purple-200 max-w-2xl"
             >
                 I deliver robust , production-ready website and web apps with speed and precision.
                 Every code is backed by the clean code, clear communication and commitment to getting
