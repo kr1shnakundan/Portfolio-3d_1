@@ -5,12 +5,11 @@ const CustomCursor = () => {
     const cursorRef = useRef(null)
     const cursorBorderRef = useRef(null)
 
-    const isMobile =
-        typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches
-
-    if (isMobile) return null
-
     useEffect(() => {
+        if (typeof window === "undefined") return
+        const isMobile = window.matchMedia("(max-width: 768px)").matches
+        if (isMobile) return
+
         const cursor = cursorRef.current
         const cursorBorder = cursorBorderRef.current
 
@@ -61,6 +60,11 @@ const CustomCursor = () => {
             document.removeEventListener("mouseup", handleMouseUp)
         }
     }, [])
+
+    const isMobile =
+        typeof window !== "undefined" && window.matchMedia("(max-width: 768px)").matches
+
+    if (isMobile) return null
 
     return (
         <>

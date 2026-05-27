@@ -1,13 +1,19 @@
+import CursorTrail from './components/CursorTrail'
 import CustomCursor from './components/CustomCursor'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
+import LiquidBackground from './components/LiquidBackground'
 
 export default function App() {
   return (
     <>
-      <Header />
-      <HeroSection/>
-      <CustomCursor/>
+      <LiquidBackground/>
+      <div>
+        <Header />
+        <HeroSection/>
+        <CursorTrail/>
+        <CustomCursor/>
+      </div>
     </>
   )
 }
