@@ -6,9 +6,7 @@ const LiquidBackground = () => {
   const mountRef = useRef(null);
 
   useEffect(() => {
-    // ==========================================
-    // 1. CORE SETUP: Scene, Camera, Renderer
-    // ==========================================
+
     const scene = new THREE.Scene();
     
     // Using an Orthographic Camera because we are doing 2D screen-space distortion, not 3D perspective

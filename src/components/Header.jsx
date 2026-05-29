@@ -4,30 +4,78 @@ import { FaGithub, FaLinkedin, FaTwitter  } from "react-icons/fa";
 import { FiMenu , FiX } from "react-icons/fi";
 const Header = () => {
   const [isOpen , setIsOpen] = useState(false);
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  const firstDivVariants = {
+    initial:{opacity:0 , x:-100 , rotateY:0},
+
+    animate:{
+      opacity:1 , 
+      x:0,
+      rotateY:0,
+      transition:{
+        opacity:{duration:1.2 , delay:0.3},
+        x:{type:"spring", stiffness:100 , damping:20 , delay:0.3},
+        rotateY:{type:"spring" , stiffness:150 , delay:0.3}
+      }
+    },
+
+    hover:{
+      rotateY:360,
+      transition:{type:"spring", stiffness:150 , delay:0}
+    }
+  }
+
+  const secondDivVariants = {
+    initial:{opacity:0,x:-100, rotateX:0},
+    animate:{
+      x:0,
+      rotateX:0,
+      opacity:1,
+      transition:{
+        opacity:{duration:1.2 ,delay:0.5},
+        x:{type:"spring", stiffness:100 , delay:0.5},
+        rotateX:{type:"spring" , stiffness:150 , delay:0}
+      }
+    },
+
+    hover:{
+      rotateX:360,
+      transition:{type:"spring",stiffness:150, delay:0.3}
+    }
+  }
   return (
     <header className="absolute w-full z-50 transition-all duration-300 ">
         <div className='container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 md:h-20' >
            
            {/* logo/name */}
            <motion.div 
-           initial={{opacity:0 , x:-100}}
-           animate={{opacity:1 , x:0}}
-           transition={{
-            type:"spring",
-            stiffness:100,
-            damping:20,
-            delay:0.3,
-            duration:1.2
+           initial="initial"
+           animate="animate"
+           whileHover="hover"
+           style={{
+            perspective:"1000px"
            }}
-           className='flex items-center gap-2'
+           className='inline-flex items-center gap-2'
            >
-                <div className='py-2 px-4 flex items-center justify-center bg-gradient-to-r from-gray-500 to-gray-100  text-purple-600 font-bold text-xl mr-3 rounded-md'>
+                <motion.div 
+                // initial={{opacity:0 , x:-100}}
+                // animate={{opacity:1 , x:0}}
+                // whileHover={{rotateY:360}}
+                // transition={{
+                //   opacity:{duration:1.2 , delay:0.3},
+                //   x:{type:"spring" , stiffness: 100 , damping:20 , delay:0.3},
+                //   rotateY:{type:"spring", stiffness:150 , damping:20}
+                // }}
+                variants={firstDivVariants}
+                className='py-2 px-4 flex items-center justify-center bg-white text-black font-bold text-xl rounded-md origin-center'>
                     K
-                </div>
-                <span className='text-xl font-bold bg-gradient-to-r from-gray-300 to-gray-100 bg-clip-text text-transparent'>
-                    Krisha Kundan
-                </span>
+                </motion.div>
+                <motion.div 
+                variants={secondDivVariants}
+                className='py-2 px-4 flex items-center justify-center bg-black text-white font-bold text-xl rounded-md origin-center'>
+                    K
+                </motion.div>
            </motion.div>
 
            {/* Desktop navigation */}
