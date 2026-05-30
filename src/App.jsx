@@ -2,7 +2,7 @@ import CursorTrail from './components/CursorTrail'
 import CustomCursor from './components/CustomCursor'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
-import OrchestratedHover from './components/temporaryCheck'
+import AboutMeSection from './components/section2'
 // import LiquidBackground from './components/LiquidBackground'
 
 export default function App() {
@@ -14,7 +14,7 @@ export default function App() {
         <HeroSection/>
         <CursorTrail/>
         <CustomCursor/>
-        <OrchestratedHover/>
+        <AboutMeSection/>
       {/* </div> */}
     </>
   )
