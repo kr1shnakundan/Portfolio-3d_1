@@ -1,0 +1,12 @@
+
+.span-line {
+  overflow: hidden;
+  display: inline-flex;
+  margin-right: 0.25em; 
+  vertical-align: top;
+}
+
+.magnetic-btn-wrapper {
+  display: inline-block;
+  cursor: pointer;
+}
