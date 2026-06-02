@@ -1,6 +1,6 @@
 
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import "./style.css"
 import { MagneticParallax } from "./scroll_hover_effect/MagneticParallax";
@@ -33,7 +33,7 @@ const AnimatedText = ({ text }) => {
       variants={container}
       initial="hidden"
       animate={isInView ? "visible" : "hidden"}
-      style={{ fontSize: "2rem", lineHeight: "1.5" ,color: "#000" }}
+      className="md:text-[2rem] text-[1.3rem] leading-[1.5] text-black"
     >
       {text.split(" ").map((word, index) => (
         <span className="span-line" key={index}>
@@ -48,6 +48,14 @@ const AnimatedText = ({ text }) => {
 
 // --- 3. MAIN SECTION COMPONENT ---
 export default function AboutMeHome() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize(); 
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   const introText = "Helping brands to stand out in the digital era. Together we will set the new status quo. No nonsense, always on the cutting edge.";
 
   return (
@@ -66,37 +74,48 @@ export default function AboutMeHome() {
         </div>
 
         {/* Right Column: Subtext and Magnetic Button */}
-        <div style={{ flex: 1, display: "flex", flexDirection: "column", gap: "2rem", maxWidth: "20vw" }}>
+        <div
+        className="flex flex-col gap-7 md:max-w-[20vw] "
+        >
           
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            style={{ fontSize: "1.2rem", color: "#383636" }}
+            className="md:text-[1.2rem] text-[#383636]"
           >
             The combination of my passion for design, code & interaction positions me in a unique place in the web design world.
           </motion.p>
 
           <div className="mx-auto">
-            <MagneticParallax offset={150}>
+            <MagneticParallax offset={isMobile ? 50 : 150}>
               {/* Style this to look like your specific rounded button */}
-              <a 
+              <motion.a 
                 href="/about" 
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  width: "120px",
-                  height: "120px",
-                  borderRadius: "50%",
-                  backgroundColor: "#111",
-                  color: "#fff",
-                  textDecoration: "none",
-                  fontWeight: "500"
-                }}
+                className="inline-flex items-center justify-center w-[120px]
+                h-[120px] rounded-full bg-[#111] text-white no-underline font-medium
+                border border-[#111]"
+                whileHover={{ 
+                backgroundColor: "#D4C3B3", // Premium Champagne/Beige tone
+                color: "#111", 
+                border: "1px solid #D4C3B3" 
+                
+              }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: isMobile ? "100px" : "140px",
+                height: isMobile ? "100px" : "140px",
+                borderRadius: "50%",
+                textDecoration: "none",
+                fontWeight: "500",
+                fontSize: "1rem"
+              }}
               >
                 About me
-              </a>
+              </motion.a>
             </MagneticParallax>
           </div>
           

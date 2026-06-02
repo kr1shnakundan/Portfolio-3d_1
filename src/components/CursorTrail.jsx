@@ -61,7 +61,7 @@ const CursorTrail = () => {
           width: '30px',
           height: '30px',
           opacity: 0,
-          background: 'linear-gradient(45deg, #ff00cc, #3333ff)', 
+          background: 'linear-gradient(45deg, #2e2c2e, #f7f7f7)', 
           borderRadius: '8px'
         }}
         />
