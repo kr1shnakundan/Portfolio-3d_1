@@ -3,6 +3,7 @@ import CustomCursor from './components/CustomCursor'
 import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import AboutMeHome from './components/section2'
+import TechArsenal from './components/section_3/TechArcenal'
 
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
         <CursorTrail/>
         <CustomCursor/>
         <AboutMeHome/>
+        <TechArsenal/>
       {/* </div> */}
     </>
   )
