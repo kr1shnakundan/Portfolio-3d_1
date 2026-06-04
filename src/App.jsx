@@ -6,6 +6,7 @@ import AboutMeHome from './components/section2'
 import TechArsenal from './components/section_3/TechArcenal'
 
 
+
 export default function App() {
   return (
     <>
@@ -17,6 +18,7 @@ export default function App() {
         <CustomCursor/>
         <AboutMeHome/>
         <TechArsenal/>
+        
       {/* </div> */}
     </>
   )
