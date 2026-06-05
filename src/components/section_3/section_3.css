@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:wdth,wght@25..151,100..1000&display=swap');
+
+.font-stretchable {
+  font-family: 'Roboto Flex', sans-serif;
+}
+
+.tech-text {
+  font-family: 'Roboto Flex', sans-serif;
+  --wdth: 100;
+  font-variation-settings: "wdth" var(--wdth, 100);
+}

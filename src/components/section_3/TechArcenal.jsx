@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import "./section_3.css";
 
 // Register the plugin so GSAP knows how to track the scrollbar
 gsap.registerPlugin(ScrollTrigger);
@@ -53,6 +54,29 @@ const TechArsenal = () => {
         end: "bottom top",
         scrub: 1,
       },
+    });
+
+    // Animate the variable font width via a CSS variable that maps to the
+    // font's 'wdth' axis. This is more reliable than animating `font-stretch`.
+    // gsap.to(".tech-text", {
+    //   "--wdth": 150,
+    //   letterSpacing: "0.1em",
+    //   ease: "none",
+    //   scrollTrigger: {
+    //     trigger: sectionRef.current,
+    //     start: "top bottom",
+    //     end: "bottom top",
+    //     scrub: 1,
+    //   },
+    // });
+
+    gsap.to(".tech-text", {
+      fontVariationSettings: '"wdth" 150',
+      ease:"none",
+      scrollTrigger: {
+        trigger: sectionRef.current,
+        scrub: true
+      }
     });
 
     const chars = headingRef.current.querySelectorAll(".char");
@@ -120,33 +144,33 @@ const TechArsenal = () => {
         ref={row1Ref} 
         className="flex items-center whitespace-nowrap text-6xl md:text-8xl font-black uppercase tracking-tighter w-[150vw] -ml-[10vw]"
       >
-        <span>FULL STACK</span> <DividerIcon />
-        <span>REACT</span> <DividerIcon />
-        <span>NODE.JS</span> <DividerIcon />
-        <span>MERN</span> <DividerIcon />
-        <span>FULL STACK</span>
+        <span className="tech-text" style={{ fontStretch: "100%" }}>FULL STACK</span> <DividerIcon />
+        <span className="tech-text" style={{ fontStretch: "100%" }}>REACT</span> <DividerIcon />
+        <span className="tech-text" style={{ fontStretch: "100%" }}>NODE.JS</span> <DividerIcon />
+        <span className="tech-text" style={{ fontStretch: "100%" }}>MERN</span> <DividerIcon />
+        <span className="tech-text" style={{ fontStretch: "100%" }}>FULL STACK</span>
       </div>
 
       <div 
         ref={row2Ref} 
         className="flex items-center whitespace-nowrap text-6xl md:text-8xl font-black uppercase tracking-tighter w-[150vw] -ml-[30vw]"
       >
-        <span>SHOPIFY OS 2.0</span> <DividerIcon />
-        <span>LIQUID LOGIC</span> <DividerIcon />
-        <span>CUSTOM THEMES</span> <DividerIcon />
-        <span>SHOPIFY OS 2.0</span>
+        <span className="tech-text" style={{ fontStretch: "100%" }}>SHOPIFY OS 2.0</span> <DividerIcon />
+        <span className="tech-text" style={{ fontStretch: "100%" }}>LIQUID LOGIC</span> <DividerIcon />
+        <span className="tech-text" style={{ fontStretch: "100%" }}>CUSTOM THEMES</span> <DividerIcon />
+        <span className="tech-text" style={{ fontStretch: "100%" }}>SHOPIFY OS 2.0</span>
       </div>
 
       {/* ROW 3 */}
       <div 
         ref={row3Ref} 
-        className="flex items-center whitespace-nowrap text-6xl md:text-8xl font-black uppercase tracking-tighter w-[150vw] -ml-[5vw]"
+        className=" flex items-center whitespace-nowrap text-6xl md:text-8xl font-black uppercase tracking-tighter w-[150vw] -ml-[5vw]"
       >
-        <span>FRAMER</span> <DividerIcon />
-        <span>SERVERLESS</span> <DividerIcon />
-        <span>SEO</span> <DividerIcon />
-        <span>MONGODB</span> <DividerIcon />
-        <span>CRO</span>
+        <span className="tech-text" style={{ fontStretch: "100%" }}>DEVOPS</span> <DividerIcon />
+        <span className="tech-text" style={{ fontStretch: "100%" }}>SERVERLESS</span> <DividerIcon />
+        <span className="tech-text" style={{ fontStretch: "100%" }}>CLOUDFLARE</span> <DividerIcon />
+        <span className="tech-text" style={{ fontStretch: "100%" }}>MONGODB</span> <DividerIcon />
+        <span className="tech-text" style={{ fontStretch: "100%" }}>DEVOPS</span>
       </div>
 
       {/* The Static Title Below */}
@@ -167,7 +191,7 @@ const TechArsenal = () => {
               leading-none
             "
           >
-            {"Transform with us".split("").map((char, index) => (
+            {"Technology Arsenal".split("").map((char, index) => (
               <span
                 key={index}
                 className="char inline-block"

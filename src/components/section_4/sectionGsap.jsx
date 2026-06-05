@@ -1,9 +1,9 @@
 
 
-const sectionGsap = () => {
+const SectionGsap = () => {
   return (
-    <div className="h-24">sectionGsap</div>
+    <div className="min-h-[80vh]">sectionGsap</div>
   )
 }
 
-export default sectionGsap;
+export default SectionGsap;

@@ -4,6 +4,7 @@ import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import AboutMeHome from './components/section2'
 import TechArsenal from './components/section_3/TechArcenal'
+import SectionGsap from './components/section_4/sectionGsap'
 
 
 
@@ -18,7 +19,7 @@ export default function App() {
         <CustomCursor/>
         <AboutMeHome/>
         <TechArsenal/>
-        
+        <SectionGsap/>
       {/* </div> */}
     </>
   )
