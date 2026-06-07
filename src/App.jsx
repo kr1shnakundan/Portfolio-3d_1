@@ -4,6 +4,7 @@ import Header from './components/Header'
 import HeroSection from './components/HeroSection'
 import AboutMeHome from './components/section2'
 import TechArsenal from './components/section_3/TechArcenal'
+import PhysicsTechStack from './components/section_4/PhysicsTechStack'
 import SectionGsap from './components/section_4/sectionGsap'
 
 
@@ -20,6 +21,7 @@ export default function App() {
         <AboutMeHome/>
         <TechArsenal/>
         <SectionGsap/>
+        <PhysicsTechStack/>
       {/* </div> */}
     </>
   )
