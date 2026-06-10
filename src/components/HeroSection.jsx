@@ -5,7 +5,7 @@ const HeroSection = () => {
   return (
     <section
     className="h-screen bg-gradient-to-r from-violet-900 to-black w-full flex 
-    items-center justify-start lg:px-24 px-10 relative overflow-hidden"
+    items-center justify-start px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 relative overflow-hidden"
     >
         {/* Right Side (Spline Container) */}
         <div className="absolute inset-0 w-full h-full pointer-events-auto">
@@ -15,7 +15,7 @@ const HeroSection = () => {
             />
         </div>
         {/* left section */}
-        <div className="z-20 max-w-3xl pointer-events-none select-none ">
+        <div className="z-20 w-full max-w-xs sm:max-w-md md:max-w-xl lg:max-w-3xl pointer-events-none select-none">
             <motion.h1 
             initial={{opacity:0 , y:50}}
             animate={{opacity:1 , y:0}}
@@ -27,7 +27,7 @@ const HeroSection = () => {
                 duration:1.5
 
             }}
-            className="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-6 ">
+            className="text-3xl xs:text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-4 sm:mb-6">
                 Building Fast <br/>
                 {/* here rotation is not applicable */}
                 <motion.span
@@ -54,11 +54,11 @@ const HeroSection = () => {
                 delay:2.0,
                 duration:1.5,
             }} 
-            className="text-xl md:text-1xl lg:text-2xl text-purple-200 max-w-2xl"
+            className="text-sm xs:text-base sm:text-lg md:text-xl lg:text-2xl text-purple-200 max-w-sm sm:max-w-md md:max-w-2xl leading-relaxed"
             >
-                I deliver robust , production-ready website and web apps with speed and precision.
-                Every code is backed by the clean code, clear communication and commitment to getting
-                it done on time , every time.
+                I deliver robust, production-ready website and web apps with speed and precision.
+                Every code is backed by clean code, clear communication and commitment to getting
+                it done on time, every time.
             </motion.p>
         </div>
         

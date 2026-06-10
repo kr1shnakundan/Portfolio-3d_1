@@ -2,7 +2,7 @@
   .skills-root { font-family: 'Sora', sans-serif; width: 100vw; padding-top: 52px; display: flex; flex-direction: column; align-items: center; overflow: hidden; margin-left: calc(-50vw + 50%); }
   .eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #aaa; margin-bottom: 10px; font-weight: 400; }
   .title { font-family: 'DM Serif Display', serif; font-size: clamp(1.2rem,2.8vw,1.9rem); font-weight: 400; font-style: italic; color: var(--color-text-primary); text-align: center; line-height: 1.5; max-width: 520px; margin: 0; }
-  .marquee-outer { position: relative; width: 100vw; aspect-ratio: 996/330; max-height: 58vh; min-height: 220px; cursor: grab; user-select: none; margin-top: 16px; transform: scaleX(1.15) scaleY(1.05); margin-left: calc(-50vw + 50%); }
+  .marquee-outer { position: relative; width: 100vw; aspect-ratio: 996/330; max-height: 58vh; min-height: 220px; cursor: grab; user-select: none; margin-top: 16px; transform: scaleX(1.15) scaleY(1.05); margin-left: calc(-50vw + 70%); }
   .marquee-outer.grabbing { cursor: grabbing; }
   .marquee-inner { position: relative; width: 100%; height: 100%; }
   .path-svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; opacity: 0; }
