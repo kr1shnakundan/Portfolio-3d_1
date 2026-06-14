@@ -1,4 +1,3 @@
-import { Curve } from 'three'
 import CursorTrail from './components/CursorTrail'
 import CustomCursor from './components/CustomCursor'
 import Header from './components/Header'
@@ -6,7 +5,7 @@ import HeroSection from './components/HeroSection'
 import AboutMeHome from './components/section2'
 import TechArsenal from './components/section_3/TechArcenal'
 import PhysicsTechStack from './components/section_4/PhysicsTechStack'
-
+import StackingCards from './components/section_4/sectionGsap'
 import CurveSection from './components/section_5/CurveLineSection'
 
 
@@ -22,7 +21,7 @@ export default function App() {
         <CustomCursor/>
         <AboutMeHome/>
         <TechArsenal/>
-        {/* <StackingCards/> */}
+        <StackingCards/>
         <PhysicsTechStack/>
         <CurveSection/>
       {/* </div> */}
