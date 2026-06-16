@@ -7,6 +7,7 @@ import TechArsenal from './components/section_3/TechArcenal'
 import PhysicsTechStack from './components/section_4/PhysicsTechStack'
 import StackingCards from './components/section_4/sectionGsap'
 import CurveSection from './components/section_5/CurveLineSection'
+import RuntimeLog from './components/section_6/Runtimelog'
 
 
 
@@ -24,6 +25,7 @@ export default function App() {
         <StackingCards/>
         <PhysicsTechStack/>
         <CurveSection/>
+        <RuntimeLog/>
       {/* </div> */}
     </>
   )
