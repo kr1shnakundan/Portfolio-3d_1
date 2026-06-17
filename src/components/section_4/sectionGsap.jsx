@@ -92,7 +92,7 @@ export default function StackingCards() {
   return (
     <div
       ref={wrapperRef}
-      className="wrapper w-full border-t-2 border-b-2 border-dashed border-gray-300"
+      className="wrapper w-full overflow-hidden border-t-2 border-b-2 border-dashed border-gray-300"
     >
       <div className="max-w-3xl mx-auto px-5 md:w-4/5 md:px-8 lg:w-[70%] lg:px-12">
         {CARDS.map((c, i) => (
