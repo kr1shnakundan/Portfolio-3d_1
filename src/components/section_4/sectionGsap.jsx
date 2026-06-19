@@ -90,39 +90,41 @@ export default function StackingCards() {
   }, []);
 
   return (
-    <div
-      ref={wrapperRef}
-      className="wrapper w-full overflow-hidden border-t-2 border-b-2 border-dashed border-gray-300"
-    >
-      <div className="max-w-3xl mx-auto px-5 md:w-4/5 md:px-8 lg:w-[70%] lg:px-12">
-        {CARDS.map((c, i) => (
-          <div
-            key={c.id}
-            className="card-wrapper w-full"
-            style={{ perspective: "500px" }}
-          >
+    <div className="overflow-hidden">
+      <div
+        ref={wrapperRef}
+        className="wrapper w-full  border-t-2 border-b-2 border-dashed border-gray-300"
+      >
+        <div className="max-w-3xl mx-auto px-5 md:w-4/5 md:px-8 lg:w-[70%] lg:px-12">
+          {CARDS.map((c, i) => (
             <div
-              ref={(el) => (cardRefs.current[i] = el)}
-              className="card w-full h-screen rounded-xl overflow-hidden flex flex-col bg-white shadow-xl shadow-black/10 will-change-transform"
+              key={c.id}
+              className="card-wrapper w-full"
+              style={{ perspective: "500px" }}
             >
-              {/* Image — majority of card */}
               <div
-                className="flex-1 bg-cover bg-no-repeat bg-top"
-                style={{ backgroundImage: `url(${c.image})` }}
-              />
+                ref={(el) => (cardRefs.current[i] = el)}
+                className="card w-full h-screen rounded-xl overflow-hidden flex flex-col bg-white shadow-xl shadow-black/10 will-change-transform"
+              >
+                {/* Image — majority of card */}
+                <div
+                  className="flex-1 bg-cover bg-no-repeat bg-top"
+                  style={{ backgroundImage: `url(${c.image})` }}
+                />
 
-              {/* Text block below image */}
-              <div className="px-6 py-5 bg-white">
-                <h3 className="text-xl md:text-2xl font-bold text-black mb-1">
-                  {c.title}
-                </h3>
-                <p className="text-sm md:text-base text-gray-500">
-                  {c.text}
-                </p>
+                {/* Text block below image */}
+                <div className="px-6 py-5 bg-white">
+                  <h3 className="text-xl md:text-2xl font-bold text-black mb-1">
+                    {c.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-500">
+                    {c.text}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );
