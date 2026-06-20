@@ -70,7 +70,7 @@ export default function StackingCards() {
           endTrigger: wrapper,
           scrub: true,
           pin: wrapperEl,
-          pinSpacing: false,
+          pinSpacing: i === cards.length - 1,
           // markers: true,
           id: `stack-card-${i + 1}`,
         },
