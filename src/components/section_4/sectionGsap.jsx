@@ -129,3 +129,129 @@
 //     </div>
 //   );
 // }
+
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
+const CARDS = [
+  {
+    id: "one",
+    image: "https://images.unsplash.com/photo-1525547719533-7da626fd08b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    title: "Design Systems",
+    text: "Building reusable, scalable component libraries that keep teams moving fast.",
+  },
+  {
+    id: "two",
+    image: "https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    title: "Motion & Interaction",
+    text: "GSAP-driven animations that add life to interfaces without slowing them down.",
+  },
+  {
+    id: "three",
+    image: "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    title: "E-commerce Builds",
+    text: "Custom Shopify themes and storefronts tuned for conversion and speed.",
+  },
+  {
+    id: "four",
+    image: "https://images.unsplash.com/photo-1461894413234-44b687946712?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    title: "Frontend Engineering",
+    text: "Pixel-accurate, performant React applications from design to deployment.",
+  },
+];
+
+export default function StackingCards() {
+  const wrapperRef = useRef(null);
+  const cardRefs = useRef([]);
+  const triggers = useRef([]);
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    const cards = cardRefs.current;
+    const activeTriggers = triggers.current;
+
+    // Clear any previous triggers
+    activeTriggers.forEach((t) => t.kill());
+    activeTriggers.length = 0;
+
+    cards.forEach((card, i) => {
+      const wrapperEl = card.closest(".card-wrapper");
+
+      let scale = 1;
+      let rotation = 0;
+
+      // Every card except the last one scales down and tilts back
+      if (i !== cards.length - 1) {
+        scale = 0.92 + 0.02 * i;
+        rotation = -6;
+      }
+
+      const tween = gsap.to(card, {
+        scale,
+        rotationX: rotation,
+        transformOrigin: "top center",
+        ease: "none",
+        scrollTrigger: {
+          trigger: wrapperEl,
+          start: "top top",
+          end: () => `+=${window.innerHeight * 0.9}`,
+          endTrigger: wrapper,
+          scrub: true,
+          pin: wrapperEl,
+          pinSpacing: i === cards.length - 1,
+          id: `stack-card-${i + 1}`,
+        },
+      });
+
+      activeTriggers.push(tween.scrollTrigger);
+    });
+
+    return () => {
+      activeTriggers.forEach((t) => t.kill());
+      activeTriggers.length = 0;
+    };
+  }, []);
+
+  return (
+    <div className="overflow-hidden">
+      <div
+        ref={wrapperRef}
+        className="wrapper w-full pt-20 pb-20 md:pt-30 md:pb-30"
+      >
+        <div className="max-w-3xl mx-auto px-5 md:w-4/5 md:px-8 lg:w-[70%] lg:px-12">
+          {CARDS.map((c, i) => (
+            <div
+              key={c.id}
+              className="card-wrapper w-full mb-12"
+              style={{ perspective: "500px" }}
+            >
+              <div
+                ref={(el) => (cardRefs.current[i] = el)}
+                className="card w-full h-screen rounded-xl overflow-hidden flex flex-col bg-white shadow-xl shadow-black/10 will-change-transform"
+              >
+                {/* Image — majority of card */}
+                <div
+                  className="flex-1 bg-cover bg-no-repeat bg-top"
+                  style={{ backgroundImage: `url(${c.image})` }}
+                />
+
+                {/* Text block below image */}
+                <div className="px-6 py-5 bg-white">
+                  <h3 className="text-xl md:text-2xl font-bold text-black mb-1">
+                    {c.title}
+                  </h3>
+                  <p className="text-sm md:text-base text-gray-500">
+                    {c.text}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
