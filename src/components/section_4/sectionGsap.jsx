@@ -1,14 +1,28 @@
-
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Tuning knobs for the stack effect — every card but the last shrinks and
+// tilts back slightly more than the one above it.
+const MIN_SCALE = 0.92;
+const SCALE_STEP = 0.02;
+const TILT_ROTATION_X = -6;
+const PIN_SCROLL_DISTANCE_RATIO = 0.9;
+
+const IMAGE_WIDTHS = [480, 768, 1170];
+
+function buildSrcSet(url) {
+  return IMAGE_WIDTHS.map((w) => `${url.replace(/w=\d+/, `w=${w}`)} ${w}w`).join(
+    ", "
+  );
+}
+
 const CARDS = [
   {
     id: "one",
-    image: "https://images.unsplash.com/photo-1525547719533-7da626fd08b6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    image: "https://images.unsplash.com/photo-1618477388954-7852f32655ec?auto=format&fit=crop&w=1170&q=80",
     title: "Design Systems",
     text: "Building reusable, scalable component libraries that keep teams moving fast.",
   },
@@ -26,7 +40,7 @@ const CARDS = [
   },
   {
     id: "four",
-    image: "https://images.unsplash.com/photo-1461894413234-44b687946712?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1170&q=80",
     title: "Frontend Engineering",
     text: "Pixel-accurate, performant React applications from design to deployment.",
   },
@@ -35,57 +49,49 @@ const CARDS = [
 export default function StackingCards() {
   const wrapperRef = useRef(null);
   const cardRefs = useRef([]);
-  const triggers = useRef([]);
+  const cardWrapperRefs = useRef([]);
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
     const cards = cardRefs.current;
-    const activeTriggers = triggers.current;
+    const cardWrappers = cardWrapperRefs.current;
 
-    // Clear any previous triggers
-    activeTriggers.forEach((t) => t.kill());
-    activeTriggers.length = 0;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
 
-    cards.forEach((card, i) => {
-      const wrapperEl = card.closest(".card-wrapper");
+    if (prefersReducedMotion) return;
 
-      let scale = 1;
-      let rotation = 0;
+    const ctx = gsap.context(() => {
+      cards.forEach((card, i) => {
+        const isLast = i === cards.length - 1;
+        const scale = isLast ? 1 : MIN_SCALE + SCALE_STEP * i;
+        const rotationX = isLast ? 0 : TILT_ROTATION_X;
 
-      // Every card except the last one scales down and tilts back
-      if (i !== cards.length - 1) {
-        scale = 0.92 + 0.02 * i;
-        rotation = -6;
-      }
-
-      const tween = gsap.to(card, {
-        scale,
-        rotationX: rotation,
-        transformOrigin: "top center",
-        ease: "none",
-        scrollTrigger: {
-          trigger: wrapperEl,
-          start: "top top",
-          end: () => `+=${window.innerHeight * 0.9}`,
-          endTrigger: wrapper,
-          scrub: true,
-          pin: wrapperEl,
-          pinSpacing: i === cards.length - 1,
-          id: `stack-card-${i + 1}`,
-        },
+        gsap.to(card, {
+          scale,
+          rotationX,
+          transformOrigin: "top center",
+          ease: "none",
+          scrollTrigger: {
+            trigger: cardWrappers[i],
+            start: "top top",
+            end: () => `+=${window.innerHeight * PIN_SCROLL_DISTANCE_RATIO}`,
+            endTrigger: wrapper,
+            scrub: true,
+            pin: cardWrappers[i],
+            pinSpacing: isLast,
+            id: `stack-card-${i + 1}`,
+          },
+        });
       });
+    }, wrapperRef);
 
-      activeTriggers.push(tween.scrollTrigger);
-    });
-
-    return () => {
-      activeTriggers.forEach((t) => t.kill());
-      activeTriggers.length = 0;
-    };
+    return () => ctx.revert();
   }, []);
 
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden bg-gradient-to-b from-violet-950 via-[#160a29] to-black">
       <div
         ref={wrapperRef}
         className="wrapper w-full pt-20 pb-20 md:pt-30 md:pb-30"
@@ -94,17 +100,24 @@ export default function StackingCards() {
           {CARDS.map((c, i) => (
             <div
               key={c.id}
+              ref={(el) => (cardWrapperRefs.current[i] = el)}
               className="card-wrapper w-full mb-12"
               style={{ perspective: "500px" }}
             >
               <div
                 ref={(el) => (cardRefs.current[i] = el)}
-                className="card w-full h-screen rounded-xl overflow-hidden flex flex-col bg-white shadow-xl shadow-black/10 will-change-transform"
+                className="card w-full h-dvh rounded-xl overflow-hidden flex flex-col bg-white shadow-xl shadow-black/10 will-change-transform"
               >
                 {/* Image — majority of card */}
-                <div
-                  className="flex-1 bg-cover bg-no-repeat bg-top"
-                  style={{ backgroundImage: `url(${c.image})` }}
+                <img
+                  src={c.image}
+                  srcSet={buildSrcSet(c.image)}
+                  sizes="(min-width: 1024px) 70vw, (min-width: 768px) 80vw, 100vw"
+                  alt={c.title}
+                  loading={i === 0 ? "eager" : "lazy"}
+                  fetchPriority={i === 0 ? "high" : "auto"}
+                  decoding="async"
+                  className="flex-1 min-h-0 w-full object-cover object-top bg-gray-100"
                 />
 
                 {/* Text block below image */}
