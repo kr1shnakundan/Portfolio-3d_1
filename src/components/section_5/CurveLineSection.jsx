@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -141,26 +142,59 @@ export default function CurveSection() {
       {/* ── Right-side body content ── */}
       <div
         ref={contentRef}
-        className="relative z-10 flex flex-col items-start text-left px-10 max-w-xl mr-12 gap-5 opacity-0"
+        className="relative z-10 flex flex-col items-start text-left px-10 max-w-xl mr-12 gap-6 opacity-0"
       >
-        <p className="text-lg text-purple-200 leading-relaxed">
-          I'm a <strong className="font-bold text-white">developer</strong> :)
+        <p className="text-2xl md:text-3xl font-semibold text-white leading-snug">
+          From first sketch to final deploy — I write clean, dependable code and back it with motion that feels intentional.
         </p>
 
-        <p className="text-lg text-purple-200 leading-relaxed">
-          Make it{" "}
-          <span className="inline-block px-4 py-1.5 bg-gradient-to-r from-violet-600 to-violet-800 text-white text-base font-semibold rounded-md">
-            ship.
-          </span>
+        <p className="text-base text-purple-200/80 leading-relaxed max-w-md">
+          No fluff, no shortcuts. Just fast, well-built products that ship on time.
         </p>
 
-        <div className="mt-3">
-          <button className="flex items-center gap-2 px-6 py-3 rounded-full border-2 border-violet-400 text-white text-base font-semibold hover:bg-violet-600 hover:border-violet-600 active:scale-95 transition-all duration-200">
+        <div className="flex flex-wrap gap-2.5">
+          {["Full-Stack Dev", "UI/UX Engineering", "Performance"].map((tag) => (
+            <span
+              key={tag}
+              className="font-mono text-xs px-3.5 py-1.5 rounded-full bg-violet-950/50 border border-violet-500/30 text-violet-200"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-4 mt-2">
+          <motion.button
+            whileHover={{ scale: 1.05, boxShadow: "0 14px 34px -10px rgba(124,58,237,0.7)" }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 22 }}
+            className="group flex items-center gap-2 px-7 py-3 rounded-full bg-gradient-to-r from-violet-600 to-violet-800 text-white text-base font-semibold shadow-lg shadow-violet-950/40"
+          >
+            View My Work
+            <svg
+              width="16" height="16" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+              className="transition-transform duration-300 group-hover:translate-x-1"
+            >
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            transition={{ type: "spring", stiffness: 400, damping: 22 }}
+            className="group flex items-center gap-2 px-6 py-3 rounded-full border-2 border-violet-400 text-white text-base font-semibold hover:bg-violet-600 hover:border-violet-600 transition-colors duration-200"
+          >
             How I Got Here
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <svg
+              width="14" height="14" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+              className="transition-transform duration-300 group-hover:translate-y-0.5"
+            >
               <path d="M6 9l6 6 6-6" />
             </svg>
-          </button>
+          </motion.button>
         </div>
       </div>
     </section>
