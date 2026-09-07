@@ -5,10 +5,25 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const contentVariants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.14, delayChildren: 0.5 },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 26 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 120, damping: 18 },
+  },
+};
+
 export default function CurveSection() {
   const sectionRef = useRef(null);
   const pathRef = useRef(null);
-  const contentRef = useRef(null);
 
   useEffect(() => {
     const path = pathRef.current;
@@ -32,24 +47,6 @@ export default function CurveSection() {
           once: true,
         },
       });
-
-      // Fade in content shortly after the path starts drawing
-      gsap.fromTo(
-        contentRef.current,
-        { opacity: 0, y: 32 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          ease: "power3.out",
-          delay: 0.6,
-          scrollTrigger: {
-            trigger: section,
-            start: "top 70%",
-            once: true,
-          },
-        }
-      );
     }, sectionRef);
 
     return () => ctx.revert();
@@ -134,36 +131,44 @@ export default function CurveSection() {
         />
       </svg>
 
+      {/* ── Ambient glow accents to fill the empty space around the copy ── */}
+      <div className="absolute top-24 right-[28%] w-72 h-72 rounded-full bg-violet-600/20 blur-3xl pointer-events-none animate-pulse" style={{ animationDuration: "5s" }} />
+      <div className="absolute bottom-32 right-16 w-64 h-64 rounded-full bg-cyan-400/10 blur-3xl pointer-events-none animate-pulse" style={{ animationDuration: "6s" }} />
+
       {/* ── Large heading — top-left, same as reference ── */}
-      <h2 className="absolute top-6 left-0 text-[clamp(3rem,10vw,7rem)] font-black text-white leading-none tracking-tight z-10 select-none px-4">
+      <h2 className="absolute top-6 left-0 text-[clamp(3rem,10vw,7rem)] font-black text-white leading-none tracking-tight z-10 select-none pl-10">
         WHAT I DO?
       </h2>
 
       {/* ── Right-side body content ── */}
-      <div
-        ref={contentRef}
-        className="relative z-10 flex flex-col items-start text-left px-10 max-w-xl mr-12 gap-6 opacity-0"
+      <motion.div
+        variants={contentVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, amount: 0.4 }}
+        className="relative z-10 flex flex-col items-start text-left px-10 max-w-xl mr-12 gap-6"
       >
-        <p className="text-2xl md:text-3xl font-semibold text-white leading-snug">
+        <motion.p variants={itemVariants} className="text-2xl md:text-3xl font-semibold text-white leading-snug">
           From first sketch to final deploy — I write clean, dependable code and back it with motion that feels intentional.
-        </p>
+        </motion.p>
 
-        <p className="text-base text-purple-200/80 leading-relaxed max-w-md">
+        <motion.p variants={itemVariants} className="text-base text-purple-200/80 leading-relaxed max-w-md">
           No fluff, no shortcuts. Just fast, well-built products that ship on time.
-        </p>
+        </motion.p>
 
-        <div className="flex flex-wrap gap-2.5">
+        <motion.div variants={itemVariants} className="flex flex-wrap gap-2.5">
           {["Full-Stack Dev", "UI/UX Engineering", "Performance"].map((tag) => (
-            <span
+            <motion.span
               key={tag}
+              whileHover={{ scale: 1.08, borderColor: "rgba(139,92,246,0.7)" }}
               className="font-mono text-xs px-3.5 py-1.5 rounded-full bg-violet-950/50 border border-violet-500/30 text-violet-200"
             >
               {tag}
-            </span>
+            </motion.span>
           ))}
-        </div>
+        </motion.div>
 
-        <div className="flex flex-wrap items-center gap-4 mt-2">
+        <motion.div variants={itemVariants} className="flex flex-wrap items-center gap-4 mt-2">
           <motion.button
             whileHover={{ scale: 1.05, boxShadow: "0 14px 34px -10px rgba(124,58,237,0.7)" }}
             whileTap={{ scale: 0.95 }}
@@ -195,8 +200,8 @@ export default function CurveSection() {
               <path d="M6 9l6 6 6-6" />
             </svg>
           </motion.button>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 }
