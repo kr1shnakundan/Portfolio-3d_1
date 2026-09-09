@@ -10,6 +10,9 @@ const MIN_SCALE = 0.92;
 const SCALE_STEP = 0.02;
 const TILT_ROTATION_X = -6;
 const PIN_SCROLL_DISTANCE_RATIO = 0.9;
+// A numeric scrub adds this many seconds of catch-up lag instead of binding
+// 1:1 to raw scroll deltas, so the stack glides instead of ticking per wheel event.
+const SCRUB_SMOOTHING = 0.8;
 
 const IMAGE_WIDTHS = [480, 768, 1170];
 
@@ -78,7 +81,8 @@ export default function StackingCards() {
             start: "top top",
             end: () => `+=${window.innerHeight * PIN_SCROLL_DISTANCE_RATIO}`,
             endTrigger: wrapper,
-            scrub: true,
+            scrub: SCRUB_SMOOTHING,
+            anticipatePin: 1,
             pin: cardWrappers[i],
             pinSpacing: isLast,
             id: `stack-card-${i + 1}`,
