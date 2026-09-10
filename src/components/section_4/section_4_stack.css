@@ -1,7 +1,7 @@
   @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Sora:wght@300;400;500&display=swap');
-  .skills-root { font-family: 'Sora', sans-serif; width: 100vw; padding-top: 52px; display: flex; flex-direction: column; align-items: center; overflow: hidden; margin-left: calc(-50vw + 50%); }
-  .eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #aaa; margin-bottom: 10px; font-weight: 400; }
-  .title { font-family: 'DM Serif Display', serif; font-size: clamp(1.2rem,2.8vw,1.9rem); font-weight: 400; font-style: italic; color: var(--color-text-primary); text-align: center; line-height: 1.5; max-width: 520px; margin: 0; }
+  .skills-root { font-family: 'Sora', sans-serif; width: 100vw; padding-top: 52px; padding-bottom: 56px; display: flex; flex-direction: column; align-items: center; overflow: hidden; margin-left: calc(-50vw + 50%); background: linear-gradient(to bottom, #2e1065, #160a29, #000); }
+  .eyebrow { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: #a78bfa; margin-bottom: 10px; font-weight: 400; }
+  .title { font-family: 'DM Serif Display', serif; font-size: clamp(1.2rem,2.8vw,1.9rem); font-weight: 400; font-style: italic; color: #fff; text-align: center; line-height: 1.5; max-width: 520px; margin: 0; }
   .marquee-outer { position: relative; width: 100vw; aspect-ratio: 996/330; max-height: 58vh; min-height: 220px; cursor: grab; user-select: none; margin-top: 16px; transform: scaleX(1.15) scaleY(1.05); margin-left: calc(-50vw + 70%); }
   .marquee-outer.grabbing { cursor: grabbing; }
   .marquee-inner { position: relative; width: 100%; height: 100%; }
@@ -9,6 +9,6 @@
   .logo-item { position: absolute; top: 0; left: 0; display: flex; flex-direction: column; align-items: center; gap: 4px; backface-visibility: hidden; will-change: offset-distance; }
   .logo-item[aria-hidden="true"] { pointer-events: none; }
   .icon-wrap { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .icon-wrap svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.14)); display: block; }
-  .logo-label { font-size: clamp(6px,0.9vw,9px); font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(0,0,0,0.45); white-space: nowrap; pointer-events: none; line-height: 1; }
-  .drag-hint { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 0.13em; color: #bbb; pointer-events: none; white-space: nowrap; }
+  .icon-wrap svg { width: 100%; height: 100%; filter: drop-shadow(0 4px 14px rgba(124,58,237,0.35)); display: block; }
+  .logo-label { font-size: clamp(6px,0.9vw,9px); font-weight: 500; letter-spacing: 0.07em; text-transform: uppercase; color: rgba(233,213,255,0.75); white-space: nowrap; pointer-events: none; line-height: 1; }
+  .drag-hint { position: absolute; bottom: 14px; left: 50%; transform: translateX(-50%); font-size: 10px; letter-spacing: 0.13em; color: rgba(196,181,253,0.55); pointer-events: none; white-space: nowrap; }
